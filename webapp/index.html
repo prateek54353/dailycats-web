@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Cats - Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../index.html">Daily Cats 🐱</a>
+            </div>
+            <div class="nav-links">
+                <button id="notificationToggle" class="notification-toggle">
+                    <span class="emoji">🔔</span>
+                    <span class="status">Enable Notifications</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cat-container">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading your daily cat...</p>
+            </div>
+            <img id="catImage" class="cat-image" alt="Daily Cat" style="display: none;">
+            <div id="error" class="error" style="display: none;">
+                <span class="emoji">😿</span>
+                <p>Oops! Something went wrong.</p>
+                <button id="retryButton" class="retry-button">Try Again</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Your daily dose of feline joy</p>
+        <p class="copyright">&copy; 2024 Daily Cats. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 
