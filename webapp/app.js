@@ -10,6 +10,16 @@ const CAT_API_URL = 'https://cataas.com/cat';
 const STORAGE_KEY = 'dailyCat';
 const NOTIFICATION_PERMISSION_KEY = 'notificationPermission';
 
+// Utility: convert a Blob to a Base64 data URL so it survives page reloads
+function blobToDataURL(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Failed to read image data'));
+        reader.readAsDataURL(blob);
+    });
+}
+
 // Check if we have a stored cat for today
 function getStoredCat() {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -43,13 +53,14 @@ async function fetchCat() {
         if (!response.ok) throw new Error('Failed to fetch cat');
         
         const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
+        // Convert the blob to a base64 data URL so it can be safely persisted in localStorage
+        const dataUrl = await blobToDataURL(blob);
         
-        catImage.src = imageUrl;
+        catImage.src = dataUrl;
         catImage.style.display = 'block';
         loading.style.display = 'none';
         
-        storeCat(imageUrl);
+        storeCat(dataUrl);
     } catch (err) {
         console.error('Error fetching cat:', err);
         loading.style.display = 'none';
